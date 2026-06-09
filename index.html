@@ -1,0 +1,294 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Plain — Product Critique</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --ink:#0A1711;
+    --green:#00B368;
+    --green-deep:#036C42;
+    --green-soft:#E6F7EF;
+    --amber:#B5730A;
+    --amber-soft:#FBF0DA;
+    --indigo:#3A57C9;
+    --indigo-soft:#E9EDFC;
+    --bg:#FFFFFF;
+    --bg-alt:#F6F8F7;
+    --text:#1B2B23;
+    --muted:#6B7A72;
+    --border:#E4EAE7;
+  }
+  *{box-sizing:border-box;margin:0;padding:0;}
+  html{scroll-behavior:smooth;}
+  body{
+    font-family:'Inter',-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;
+    color:var(--text);
+    background:var(--bg);
+    line-height:1.55;
+    -webkit-font-smoothing:antialiased;
+  }
+
+  /* Top bar */
+  .topbar{
+    background:var(--ink);
+    color:#fff;
+    padding:18px 28px;
+    display:flex;
+    align-items:center;
+    gap:14px;
+  }
+  .wordmark{
+    display:flex;align-items:center;gap:9px;
+    font-weight:800;font-size:20px;letter-spacing:-0.02em;color:#fff;
+  }
+  .wordmark .dot{
+    width:22px;height:22px;border-radius:7px;background:var(--green);
+    display:inline-block;
+  }
+  .wordmark .name{color:var(--green);}
+  .topbar .divider{width:1px;height:20px;background:rgba(255,255,255,0.22);}
+  .topbar .kicker{font-weight:500;font-size:14px;color:rgba(255,255,255,0.72);letter-spacing:0.01em;}
+
+  /* Hero */
+  .hero{
+    max-width:1120px;margin:0 auto;padding:64px 28px 36px;
+  }
+  .eyebrow{
+    font-size:13px;font-weight:600;letter-spacing:0.08em;text-transform:uppercase;
+    color:var(--green-deep);margin-bottom:16px;
+  }
+  h1{
+    font-size:clamp(34px,5vw,52px);line-height:1.05;font-weight:800;
+    letter-spacing:-0.03em;color:var(--ink);max-width:14ch;
+  }
+  .lede{
+    margin-top:20px;font-size:18px;color:var(--muted);max-width:60ch;
+  }
+  .byline{
+    margin-top:24px;font-size:14px;color:var(--muted);
+  }
+  .byline strong{color:var(--text);font-weight:600;}
+
+  /* Legend */
+  .legend{
+    display:flex;flex-wrap:wrap;gap:10px;margin-top:28px;
+  }
+  .chip{
+    display:inline-flex;align-items:center;gap:8px;
+    font-size:13px;font-weight:600;padding:7px 13px;border-radius:999px;
+  }
+  .chip .sw{width:9px;height:9px;border-radius:50%;display:inline-block;}
+  .chip.working{background:var(--green-soft);color:var(--green-deep);}
+  .chip.working .sw{background:var(--green);}
+  .chip.confusing{background:var(--amber-soft);color:var(--amber);}
+  .chip.confusing .sw{background:var(--amber);}
+  .chip.improve{background:var(--indigo-soft);color:var(--indigo);}
+  .chip.improve .sw{background:var(--indigo);}
+
+  /* Table section */
+  .section{max-width:1120px;margin:0 auto;padding:8px 28px 40px;}
+  .table-wrap{
+    border:1px solid var(--border);border-radius:16px;overflow:hidden;
+    box-shadow:0 1px 2px rgba(10,23,17,0.04),0 10px 30px rgba(10,23,17,0.04);
+  }
+  .scroll{overflow-x:auto;}
+  table{border-collapse:collapse;width:100%;min-width:860px;}
+  thead th{
+    background:var(--ink);color:#fff;text-align:left;
+    font-size:13px;font-weight:600;letter-spacing:0.02em;
+    padding:16px 20px;vertical-align:middle;
+  }
+  thead th .hl{display:inline-flex;align-items:center;gap:8px;}
+  thead th .sw{width:9px;height:9px;border-radius:50%;display:inline-block;}
+  thead th.c-feature{width:15%;}
+  thead th.c-col{width:28.3%;}
+  th.c-work .sw{background:var(--green);}
+  th.c-conf .sw{background:var(--amber);}
+  th.c-impr .sw{background:var(--indigo);}
+
+  tbody tr{border-top:1px solid var(--border);}
+  tbody tr:nth-child(even){background:var(--bg-alt);}
+  tbody td{padding:18px 20px;vertical-align:top;font-size:14.5px;}
+  td.feature{
+    font-weight:700;color:var(--ink);font-size:15px;letter-spacing:-0.01em;
+    border-left:3px solid var(--green);
+  }
+  ul.cell{list-style:none;display:flex;flex-direction:column;gap:8px;}
+  ul.cell li{position:relative;padding-left:18px;}
+  ul.cell li::before{
+    content:"";position:absolute;left:0;top:8px;
+    width:7px;height:7px;border-radius:50%;
+  }
+  .work li::before{background:var(--green);}
+  .conf li::before{background:var(--amber);}
+  .impr li::before{background:var(--indigo);}
+  .none{color:var(--muted);font-style:italic;}
+
+  /* Notes section */
+  .notes{max-width:1120px;margin:0 auto;padding:12px 28px 72px;}
+  .notes h2{
+    font-size:13px;font-weight:600;letter-spacing:0.08em;text-transform:uppercase;
+    color:var(--muted);margin-bottom:18px;
+  }
+  .note-card{
+    border:1px solid var(--border);border-radius:14px;background:var(--bg-alt);
+    padding:22px 24px;
+  }
+  .note-card ul{list-style:none;display:flex;flex-direction:column;gap:12px;}
+  .note-card li{position:relative;padding-left:20px;font-size:14.5px;color:var(--text);}
+  .note-card li::before{
+    content:"";position:absolute;left:0;top:8px;width:7px;height:7px;border-radius:2px;
+    background:var(--amber);
+  }
+
+  /* Footer */
+  footer{
+    border-top:1px solid var(--border);
+    padding:28px;text-align:center;color:var(--muted);font-size:13px;
+  }
+  footer .name{color:var(--green-deep);font-weight:600;}
+
+  @media (max-width:640px){
+    .hero{padding:44px 20px 28px;}
+    .section,.notes{padding-left:20px;padding-right:20px;}
+    .topbar{padding:16px 20px;}
+  }
+</style>
+</head>
+<body>
+
+  <div class="topbar">
+    <span class="wordmark"><span class="dot"></span><span class="name">Plain</span></span>
+    <span class="divider"></span>
+    <span class="kicker">Product Critique</span>
+  </div>
+
+  <header class="hero">
+    <div class="eyebrow">Hands-on review</div>
+    <h1>Plain Product Critique</h1>
+    <div class="legend">
+      <span class="chip working"><span class="sw"></span>What's working</span>
+      <span class="chip confusing"><span class="sw"></span>What's confusing</span>
+      <span class="chip improve"><span class="sw"></span>What I'd improve</span>
+    </div>
+    <p class="byline"><strong>Maddy Chung</strong></p>
+  </header>
+
+  <section class="section">
+    <div class="table-wrap">
+      <div class="scroll">
+        <table>
+          <thead>
+            <tr>
+              <th class="c-feature">Feature</th>
+              <th class="c-col c-work"><span class="hl"><span class="sw"></span>What's working</span></th>
+              <th class="c-col c-conf"><span class="hl"><span class="sw"></span>What's confusing</span></th>
+              <th class="c-col c-impr"><span class="hl"><span class="sw"></span>What I'd improve</span></th>
+            </tr>
+          </thead>
+          <tbody>
+
+            <tr>
+              <td class="feature">Navigation &amp; UX</td>
+              <td><ul class="cell work"><li>Easy to navigate</li><li>The double menu makes it easy to get around the product</li></ul></td>
+              <td><span class="none">Nothing major</span></td>
+              <td><span class="none">Nothing major</span></td>
+            </tr>
+
+            <tr>
+              <td class="feature">Threads</td>
+              <td><ul class="cell work"><li>Holistic paper trail</li><li>Easy to find a thread, reply in-Plain, and see related objects</li></ul></td>
+              <td><span class="none">Nothing major</span></td>
+              <td><ul class="cell impr"><li>Let users customize the fields and layout of the thread view</li></ul></td>
+            </tr>
+
+            <tr>
+              <td class="feature">Channels</td>
+              <td><ul class="cell work"><li>Brought 2 into my Plain inbox (Slack, email)</li><li>Slack setup worked as expected</li><li>Replied to the "customer" via Plain</li></ul></td>
+              <td><span class="none">Nothing major</span></td>
+              <td><span class="none">Nothing major</span></td>
+            </tr>
+
+            <tr>
+              <td class="feature">Workflows</td>
+              <td><ul class="cell work"><li>Builder is simple, intuitive, and fast to launch automations</li></ul></td>
+              <td><ul class="cell conf"><li>After publishing, it's hard to understand why a workflow didn't behave as expected</li></ul></td>
+              <td><ul class="cell impr"><li>Test / dry-run that simulates a workflow against an existing thread and shows what each step would do, without making the changes</li><li>Step-by-step run history to troubleshoot</li><li>NLP workflows: describe it in plain English, Plain builds it with the code exposed</li></ul></td>
+            </tr>
+
+            <tr>
+              <td class="feature">Plain AI</td>
+              <td><ul class="cell work"><li>Auto-triages and labels threads automatically, no manual tagging</li></ul></td>
+              <td><ul class="cell conf"><li>AI applied a label even though the thread didn't meet my conditions, and kept doing it after I added AI guidance, with no visibility into why</li></ul></td>
+              <td><ul class="cell impr"><li>Transparency and override when AI acts, e.g. a callout like "Plain AI can add this label, change in settings," with an easy way to turn it off</li></ul></td>
+            </tr>
+
+            <tr>
+              <td class="feature">Sidekick</td>
+              <td><ul class="cell work"><li>Easy to reach from a thread</li><li>Responses are helpful</li></ul></td>
+              <td><ul class="cell conf"><li>Didn't suggest the obvious Agent-handoff filter for my problem</li><li>Eventually broke and wouldn't stop "Thinking"</li></ul></td>
+              <td><ul class="cell impr"><li>Make Sidekick accessible everywhere in the product, not just threads</li></ul></td>
+            </tr>
+
+            <tr>
+              <td class="feature">Ari</td>
+              <td><ul class="cell work"><li>Fast, easy setup</li><li>Added a sitemap and had it responding to threads quickly</li><li>A log of all Ari changes and responses lives in the thread, making it easy to track</li><li>Responses were detailed and seemed accurate and helpful</li></ul></td>
+              <td><ul class="cell conf"><li>After handing off, Ari unassigned itself and I couldn't figure out how to reassign the thread to myself when the agent status was "handed off"</li></ul></td>
+              <td><ul class="cell impr"><li>Clearer handoff controls: make it obvious how to take a thread back from Ari and assign it to a person after handoff</li></ul></td>
+            </tr>
+
+            <tr>
+              <td class="feature">Tasks</td>
+              <td><ul class="cell work"><li>A low-friction, lightweight to-do</li></ul></td>
+              <td><ul class="cell conf"><li>Limited functionality (can't link a Jira ticket or comment on a task), so it's unclear whether Tasks replaces or integrates with existing issue trackers, or is just for individual use</li></ul></td>
+              <td><ul class="cell impr"><li>Clarify its positioning versus issue trackers, or lean into it as a personal to-do</li><li>Add linking and commenting if it's meant for escalation</li></ul></td>
+            </tr>
+
+            <tr>
+              <td class="feature">Integrations</td>
+              <td><ul class="cell work"><li>Create and link a Jira issue directly from a thread</li></ul></td>
+              <td><ul class="cell conf"><li>Discoverability: I forgot I could create a Jira ticket from the thread</li></ul></td>
+              <td><ul class="cell impr"><li>Native issue-tracker action in Workflows (today it needs an HTTP / API call)</li><li>Nudges to surface the capability</li></ul></td>
+            </tr>
+
+            <tr>
+              <td class="feature">Insights</td>
+              <td><ul class="cell work"><li>Lots of great charts and KPIs tracked in Reporting</li></ul></td>
+              <td><span class="none">Nothing major</span></td>
+              <td><ul class="cell impr"><li>Add agent-impact views like % of issues resolved by agents, to tie support data to KPI outcomes</li></ul></td>
+            </tr>
+
+            <tr>
+              <td class="feature">Onboarding / first-run</td>
+              <td><ul class="cell work"><li>I was able to set up the core functionality as a non-support and non-engineer user</li></ul></td>
+              <td><ul class="cell conf"><li>Landing / first-run page isn't very rich</li><li>Light on product tips and guidance</li></ul></td>
+              <td><ul class="cell impr"><li>Richer first-run page with value-prop framed quick actions</li><li>Optional multi-step product tour on core concepts</li><li>Gamification for goalposts like first channel and first resolved thread</li><li>Tooltips and nudges</li></ul></td>
+            </tr>
+
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </section>
+
+  <section class="notes">
+    <h2>Smaller items &amp; bugs</h2>
+    <div class="note-card">
+      <ul>
+        <li>Slack "Ingestion mode" is phrased like it sets conditions ("Decide whether...") but it's a fixed mode picker, not condition-based</li>
+        <li>Workflows: clicking "Delete" gives no feedback, though the workflow is deleted when you return to the list</li>
+      </ul>
+    </div>
+  </section>
+
+  <footer>
+    Hands-on product critique &middot; <span class="name">Maddy Chung</span>
+  </footer>
+
+</body>
+</html>
