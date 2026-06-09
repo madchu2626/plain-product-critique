@@ -35,24 +35,22 @@
 
   /* Top bar */
   .topbar{
-    background:var(--ink);
-    color:#fff;
+    background:#fff;
+    color:var(--ink);
     padding:18px 28px;
     display:flex;
     align-items:center;
     gap:14px;
+    border-bottom:1px solid var(--border);
   }
   .wordmark{
     display:flex;align-items:center;gap:9px;
-    font-weight:800;font-size:20px;letter-spacing:-0.02em;color:#fff;
+    font-weight:800;font-size:23px;letter-spacing:-0.03em;color:var(--ink);
   }
-  .wordmark .dot{
-    width:22px;height:22px;border-radius:7px;background:var(--green);
-    display:inline-block;
-  }
-  .wordmark .name{color:var(--green);}
-  .topbar .divider{width:1px;height:20px;background:rgba(255,255,255,0.22);}
-  .topbar .kicker{font-weight:500;font-size:14px;color:rgba(255,255,255,0.72);letter-spacing:0.01em;}
+  .wordmark svg{display:block;width:30px;height:30px;}
+  .wordmark .name{color:var(--ink);}
+  .topbar .divider{width:1px;height:20px;background:var(--border);}
+  .topbar .kicker{font-weight:500;font-size:14px;color:var(--muted);letter-spacing:0.01em;}
 
   /* Hero */
   .hero{
@@ -64,7 +62,7 @@
   }
   h1{
     font-size:clamp(34px,5vw,52px);line-height:1.05;font-weight:800;
-    letter-spacing:-0.03em;color:var(--ink);max-width:14ch;
+    letter-spacing:-0.03em;color:var(--ink);white-space:nowrap;
   }
   .lede{
     margin-top:20px;font-size:18px;color:var(--muted);max-width:60ch;
@@ -163,7 +161,13 @@
 <body>
 
   <div class="topbar">
-    <span class="wordmark"><span class="dot"></span><span class="name">Plain</span></span>
+    <span class="wordmark">
+      <svg viewBox="0 0 40 40" fill="none" aria-hidden="true">
+        <path d="M9 17 C 9 9, 20 8, 22 18" stroke="#00B368" stroke-width="7.5" stroke-linecap="round"/>
+        <path d="M31 23 C 31 31, 20 32, 18 22" stroke="#1FBF77" stroke-width="7.5" stroke-linecap="round"/>
+      </svg>
+      <span class="name">Plain</span>
+    </span>
     <span class="divider"></span>
     <span class="kicker">Product Critique</span>
   </div>
@@ -171,11 +175,6 @@
   <header class="hero">
     <div class="eyebrow">Hands-on review</div>
     <h1>Plain Product Critique</h1>
-    <div class="legend">
-      <span class="chip working"><span class="sw"></span>What's working</span>
-      <span class="chip confusing"><span class="sw"></span>What's confusing</span>
-      <span class="chip improve"><span class="sw"></span>What I'd improve</span>
-    </div>
     <p class="byline"><strong>Maddy Chung</strong></p>
   </header>
 
