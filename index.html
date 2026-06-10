@@ -88,10 +88,32 @@
   .chip.improve{background:var(--indigo-soft);color:var(--indigo);}
   .chip.improve .sw{background:var(--indigo);}
 
+  /* Takeaways */
+  .takeaways{max-width:1120px;margin:0 auto;padding:4px 28px 20px;}
+  .takeaways h2{
+    font-size:13px;font-weight:600;letter-spacing:0.08em;text-transform:uppercase;
+    color:var(--green-deep);margin-bottom:18px;
+  }
+  .takeaway-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:16px;}
+  .takeaway{
+    border:1px solid var(--border);border-top:3px solid var(--green);
+    border-radius:14px;background:var(--bg-alt);padding:22px 22px 24px;
+  }
+  .takeaway .num{
+    display:inline-flex;align-items:center;justify-content:center;
+    width:26px;height:26px;border-radius:8px;background:var(--green-soft);
+    color:var(--green-deep);font-weight:700;font-size:14px;margin-bottom:14px;
+  }
+  .takeaway h3{
+    font-size:15.5px;font-weight:700;color:var(--ink);
+    letter-spacing:-0.01em;line-height:1.3;margin-bottom:9px;
+  }
+  .takeaway p{font-size:14px;color:var(--muted);line-height:1.55;}
+
   /* Table section */
   .section{max-width:1120px;margin:0 auto;padding:8px 28px 40px;}
   .table-wrap{
-    border:1px solid var(--border);border-radius:16px;overflow:hidden;
+    border:2px solid var(--green);border-radius:16px;overflow:hidden;
     box-shadow:0 1px 2px rgba(10,23,17,0.04),0 10px 30px rgba(10,23,17,0.04);
   }
   .scroll{overflow-x:auto;}
@@ -151,9 +173,12 @@
   }
   footer .name{color:var(--green-deep);font-weight:600;}
 
+  @media (max-width:860px){
+    .takeaway-grid{grid-template-columns:1fr;}
+  }
   @media (max-width:640px){
     .hero{padding:44px 20px 28px;}
-    .section,.notes{padding-left:20px;padding-right:20px;}
+    .section,.notes,.takeaways{padding-left:20px;padding-right:20px;}
     .topbar{padding:16px 20px;}
   }
 </style>
@@ -174,6 +199,27 @@
     <h1>Plain Product Critique</h1>
     <p class="byline"><strong>Maddy Chung</strong></p>
   </header>
+
+  <section class="takeaways">
+    <h2>Top takeaways</h2>
+    <div class="takeaway-grid">
+      <div class="takeaway">
+        <span class="num">1</span>
+        <h3>Core functionality is powerful and intuitive</h3>
+        <p>As a marketer with no customer support or support engineering experience, I was pretty easily able to get the core functionality live and see the value. The product is easily navigable, the workflows are intuitive, and the AI agents were quick to set up and producing helpful responses almost immediately.</p>
+      </div>
+      <div class="takeaway">
+        <span class="num">2</span>
+        <h3>There's opportunity to improve the trial / first-run experience to drive conversion</h3>
+        <p>I'm coming to the trial from a growth perspective, and saw some levers to pull to improve conversion to a paid plan. Some ideas include a richer landing page with value-prop framed quick actions, an optional multi-step product tour on core concepts, and gamification for goalposts like first channel and first resolved thread.</p>
+      </div>
+      <div class="takeaway">
+        <span class="num">3</span>
+        <h3>AI is central to the product, and the pieces I tried were promising</h3>
+        <p>In my testing I saw the power of the agents, and also hit a few moments where I wasn't sure why the AI acted the way it did (like applying a label outside the conditions I set). I can't say how representative that is from a short session and being a new user, but it made me curious how much visibility and control users have when AI makes a decision — which feels like it matters for a technical ICP that likes to stay in control.</p>
+      </div>
+    </div>
+  </section>
 
   <section class="section">
     <div class="table-wrap">
@@ -278,6 +324,7 @@
       <ul>
         <li>Slack "Ingestion mode" is phrased like it sets conditions ("Decide whether...") but it's a fixed mode picker, not condition-based</li>
         <li>Workflows: clicking "Delete" gives no feedback, though the workflow is deleted when you return to the list</li>
+        <li>Landing-page setup: the "add an integration" step said "add Linear, Jira, etc.," but when I clicked it (intending to add Jira) it only showed Linear — finding Jira took a moment</li>
       </ul>
     </div>
   </section>
